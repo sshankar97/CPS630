@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lab3</title>
+
+<link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+
+<body>
+<article>
+  <div id="dropB">Drop file here...</div>
+  <p id="flag"></p>
+<input id="fileInput" type="file">
+<img id="thumbnail">
+<div id="newLoc"></div>
+
+<script>
+var pString;
+window.onload= function() {
+dropBox =  document.getElementById("dropB");
+
+
+	dropBox.ondragenter = enterDrag;
+        dropBox.ondragleave = leaveDrag;
+	dropBox.ondragover = ignoreDrag;
+	dropBox.ondrop = drop;
+}
+function enterDrag(e){
+        e.preventDefault();
+	filter: "#dropB.hover";
+}
+function leaveDrag(e){
+        e.preventDefault();
+
+}
+function ignoreDrag(e) {
+	e.stopPropagation();
+	e.preventDefault();
+}
+
+function drop(e){
+	e.stopPropagation();
+	e.preventDefault();
+
+	var data = e.dataTransfer;
+	var files = data.files;
+
+	processFiles(files);
+
+}
+
+function processFiles(files){
+	var file = files[0];
+	var textType = /text.*/;
+
+	if (file.type.match(textType)) {
+		var reader = new FileReader();
+		reader.onload = function(e){
+			pString = reader.result;
+
+dropBox.innerHTML = "Entered Location:" + pString;
+
+		};
+		reader.readAsText(file);
+	}
+}
+</script>
+</article>
+
+<nav>
+
+<p> Get Current Location by clicking the Current Location button, OR entering your own location coordinates!<p>
+
+<button onclick="getLocation()">Current Location</button>
+<h3>Latitude:</h3>
+<input type="text" id="latitude" >
+<br>
+<h3>Longitude:</h3>
+<input type="text" id="longitude">
+<button onclick="setLoc();">Set Location!</button>
+
+<br>
+<button onclick="distanceWorker();">Calculate Distance</button>
+<div id="distance"></div>
+</nav>
+
+<section>
+<p id="curPos"></p>
+<div id="map"></div>
+</section>
+
+<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDW7XM4oGnnOrZfochxbaGO-FKrDp6gMWY"></script>
+<script>
+var lati;
+var long;
+function setLoc() {
+
+   lati =  document.getElementById('latitude').value;
+long =document.getElementById('longitude').value;
+var pos = document.getElementById("curPos");
+pos.innerHTML = "Latitude: " + lati +
+    "<br>Longitude: " + long;
+
+}
+var x = document.getElementById("curPos");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "This browser does not support Geolocation.";
+    }
+}
+
+function showPosition(position) {
+lati=position.coords.latitude;
+long=position.coords.longitude;
+    x.innerHTML = "Latitude: " + lati +
+    "<br>Longitude: " + long;
+
+ latlon = new google.maps.LatLng(lati, long)
+    mapholder = document.getElementById('map')
+    mapholder.style.height = '250px';
+    mapholder.style.width = '500px';
+
+    var myOptions = {
+    center:latlon,zoom:14,
+    mapTypeId:google.maps.MapTypeId.ROADMAP,
+    mapTypeControl:false,
+    navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+      }
+
+      var map = new google.maps.Map(document.getElementById("map"), myOptions);
+    var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+    }
+    </script>
+
+
+
+
+
+</body>
+</html>

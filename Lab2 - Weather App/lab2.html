@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.one {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+article {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+article {
+    width: 50%;
+float: left;
+height: 30%;
+
+    padding: 15px;
+    background: #4682b4;
+    border: 1px solid black;
+    color: white;
+font-family: "Lucida Sans", sans-serif;
+text-align:center;
+
+}
+.one {
+    width: 100%;
+    background: #87CEEB;
+    color: white;
+    float: left;
+    padding: 15px;
+    border: 1px solid white;
+  height:70%;
+font-family: "Lucida Sans", sans-serif;
+}
+section{
+    width: 50%;
+
+    color: white;
+    float: left;
+    padding: 15px;
+    border: 1px solid black;
+  height:70%;
+ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCXW_Xvt_5ugrybe_H_uyhWAJSPgQM_FOkv19lUqkzhnkAQ2s8L9eskqc);
+
+    background-size: 100%;
+font-family: "Lucida Sans", sans-serif;
+}
+@media only screen and (max-width: 500px) {
+
+article {
+    width: 100%;
+float: left;
+
+
+    padding: 15px;
+    background: #4682b4;
+    border: 1px solid black;
+    color: white;
+font-family: "Lucida Sans", sans-serif;
+text-align:center;
+
+}
+.one {
+    width: 100%;
+    background: #87CEEB;
+    color: white;
+
+    padding: 15px;
+    border: 1px solid white;
+
+font-family: "Lucida Sans", sans-serif;
+}
+section{
+    width: 100%;
+
+    color: white;
+
+    padding: 15px;
+    border: 1px solid black;
+
+ background: #87CEEB;
+
+    background-size: 100%;
+font-family: "Lucida Sans", sans-serif;
+}
+}
+</style>
+
+
+
+<script type"text/javascript" src="lab2.js"></script>
+</head>
+<body>
+<section class="one">
+<h2>My Weather App</h2>
+
+Enter city: <input type="text" id="cityName" onkeyup="javascript:myFunction(this.id, this.value);">
+<button onclick="getCity();">Kelvin!</button>
+<button onclick="celsius();"> Celsius! </button>
+<button onclick="ferenheit();"> Ferenheit! </button>
+
+</section>
+
+<article>
+<p id="i"></p>
+<h2 align="left" id="city"><b></b></h2>
+
+<h1 id = "weather"></h1>
+
+<h5>Wind: </h5>
+<p id="wind"></p>
+<h5>Wind Direction: </h5>
+<p id="dir"></p>
+<h5>Humidity: </h5>
+<p id="hum"></p>
+<br></br>
+<br></br>
+
+</article>
+<section>
+<div style="height:500px;width:100%; #ccc;overflow:auto;">
+<h5 id="fweather"></h5>
+
+</div>
+
+</section>
+</body>
+</html>
